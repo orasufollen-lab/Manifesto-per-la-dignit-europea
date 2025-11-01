@@ -1,0 +1,115 @@
+/* Stili Generali */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif; /* Font classico per un effetto "storico" */
+    color: yellow; /* Testo giallo per contrastare con lo sfondo scuro */
+    overflow: hidden; /* Nasconde le barre di scorrimento */
+}
+
+/* 1. Animazione Slideshow Sfondo */
+.background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Metti lo sfondo dietro a tutto il resto */
+}
+
+.background-slideshow div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Inizia con opacità 0 */
+    animation: imageAnimation 40s linear infinite; /* 4 immagini * 10s per immagine = 40s */
+    filter: brightness(0.6) grayscale(0.2); /* Scurisci leggermente le immagini per far risaltare il testo */
+}
+
+/* Ritardo per ciascuna immagine (4 immagini, 10 secondi per immagine) */
+.background-slideshow div:nth-child(1) { animation-delay: 0s; }
+.background-slideshow div:nth-child(2) { animation-delay: 10s; }
+.background-slideshow div:nth-child(3) { animation-delay: 20s; }
+.background-slideshow div:nth-child(4) { animation-delay: 30s; }
+
+/* Keyframes per l'animazione dello sfondo (crossfade) */
+@keyframes imageAnimation {
+    0% { opacity: 0; animation-timing-function: ease-in; }
+    2% { opacity: 1; } /* Fade-in in 2% del tempo */
+    23% { opacity: 1; } /* Rimanere visibile fino al 23% */
+    25% { opacity: 0; animation-timing-function: ease-out; } /* Fade-out al 25% */
+    100% { opacity: 0; }
+}
+
+
+/* 2. Contenitore e scorrimento del testo */
+.content-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow: hidden; /* Essenziale per contenere solo la parte visibile del testo */
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.4); /* Sovrapposizione scura semi-trasparente */
+}
+
+.scrolling-text-wrapper {
+    position: absolute;
+    width: 80%; /* Larghezza del testo */
+    height: 100%;
+    overflow: hidden;
+}
+
+.scrolling-text {
+    width: 100%;
+    /* Posiziona il testo completamente sotto lo schermo all'inizio */
+    transform: translateY(100vh); 
+    /* Velocità dello scorrimento (esempio: 200s per tutto il testo) */
+    animation: creditsRoll 100s linear infinite; 
+    text-align: left;
+    padding: 50px 0;
+}
+
+/* Stili per il testo nel manifesto */
+.scrolling-text h1 { font-size: 2.5em; margin-top: 100px; color: #ffcc00; } /* Giallo stelle EU */
+.scrolling-text h2 { font-size: 1.5em; margin-bottom: 50px; }
+.scrolling-text h3 { font-size: 1.2em; margin-top: 40px; color: #ffcc00; }
+.scrolling-text p { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; }
+.scrolling-text .final-message { margin-top: 50px; font-style: italic; }
+
+/* Keyframes per l'animazione del testo */
+@keyframes creditsRoll {
+    0% {
+        transform: translateY(100vh); /* Inizia dal basso */
+    }
+    100% {
+        /* Sposta il testo verso l'alto. Il valore esatto dipende dall'altezza del contenuto. */
+        /* Moltiplica l'altezza del contenuto del manifesto per -1 */
+        transform: translateY(-200%); 
+    }
+}
+
+
+/* 3. Pulsante di traduzione (Bandiera) */
+#lang-switch-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 3px solid #ffcc00; /* Bordo giallo */
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+#lang-switch-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ffcc00;
+}
